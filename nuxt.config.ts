@@ -2,7 +2,13 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: [
+    'nuxt-gtag','@nuxtjs/tailwindcss'],
+
+  gtag: {
+    id: process.env.GOOGLE_ANALYTICS_ID || '',
+    enabled: !!process.env.GOOGLE_ANALYTICS_ID
+  },
   app: {
     head: {
       title: 'UX Dojo - Learn UX Laws Through Games',
