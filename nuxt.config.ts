@@ -13,6 +13,7 @@ export default defineNuxtConfig({
     head: {
       title: 'UX Dojo - Learn UX Laws Through Games',
       meta: [
+        { name: 'google-site-verification', content: 'UfZFQPhRDEA7Fpx_JGvbn4FS4wF0oTfLeUNmWxKuLs8' },
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: 'Interactive mini-games that teach the Laws of UX through fun challenges' }
