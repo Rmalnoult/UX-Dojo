@@ -1,9 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  sourcemap: false,
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: [
-    'nuxt-gtag','@nuxtjs/tailwindcss'],
+    '@sentry/nuxt/module',
+    'nuxt-gtag',
+    '@nuxtjs/tailwindcss',
+  ],
+
+  sentry: {
+    dsn: process.env.NUXT_PUBLIC_SENTRY_DSN,
+    environment: process.env.NODE_ENV || 'production',
+  },
 
   gtag: {
     id: process.env.GOOGLE_ANALYTICS_ID || '',
