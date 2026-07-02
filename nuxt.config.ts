@@ -10,8 +10,10 @@ export default defineNuxtConfig({
   ],
 
   sentry: {
-    dsn: process.env.NUXT_PUBLIC_SENTRY_DSN,
-    environment: process.env.NODE_ENV || 'production',
+    sourceMapsUploadOptions: {
+      org: 'romain-malnoult',
+      project: 'ux-dojo',
+    },
   },
 
   gtag: {
