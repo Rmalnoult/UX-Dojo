@@ -1,2 +1,4 @@
 User-Agent: *
 Disallow:
+
+Sitemap: https://ux-dojo.com/sitemap.xml

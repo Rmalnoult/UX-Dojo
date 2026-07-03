@@ -159,12 +159,58 @@
           </div>
         </UiCard>
       </div>
+
+      <!-- About the Law -->
+      <section class="max-w-3xl mx-auto mt-16 mb-12">
+        <h2 class="text-2xl font-bold mb-2">About {{ game.title }}</h2>
+        <p class="text-sm text-muted-foreground mb-6">Formulated by {{ game.law.formulatedBy }}</p>
+        <div class="space-y-4 text-muted-foreground leading-relaxed">
+          <p v-for="(paragraph, index) in game.law.paragraphs" :key="index">{{ paragraph }}</p>
+        </div>
+      </section>
+
+      <!-- Try Another Game -->
+      <section class="max-w-5xl mx-auto mb-8">
+        <h2 class="text-xl font-semibold mb-6 text-center">Try Another Game</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <GameCard
+            v-for="related in relatedGames"
+            :key="related.id"
+            :title="related.title"
+            :description="related.description"
+            :icon="related.icon"
+            :link="related.link"
+            :duration="related.duration"
+          />
+        </div>
+      </section>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ChevronLeft } from 'lucide-vue-next'
+import { getGame, getRelatedGames } from '~/utils/games'
+
+const game = getGame('serial')!
+const relatedGames = getRelatedGames('serial')
+
+useSeoMeta({
+  title: game.seoTitle,
+  description: game.seoDescription,
+  ogTitle: game.seoTitle,
+  ogDescription: game.seoDescription,
+  ogUrl: `https://ux-dojo.com${game.link}`,
+})
+
+useJsonLd({
+  '@context': 'https://schema.org',
+  '@type': 'Game',
+  name: game.title,
+  description: game.seoDescription,
+  url: `https://ux-dojo.com${game.link}`,
+  isAccessibleForFree: true,
+})
 
 // Word pools by category
 const wordPools = {

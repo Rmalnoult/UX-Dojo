@@ -7,7 +7,13 @@ export default defineNuxtConfig({
     '@sentry/nuxt/module',
     'nuxt-gtag',
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/sitemap',
   ],
+
+  site: {
+    url: 'https://ux-dojo.com',
+    name: 'UX Dojo',
+  },
 
   sentry: {
     sourceMapsUploadOptions: {
@@ -23,6 +29,8 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'UX Dojo - Learn UX Laws Through Games',
+      titleTemplate: '%s | UX Dojo',
+      htmlAttrs: { lang: 'en' },
       meta: [
         { name: 'google-site-verification', content: 'UfZFQPhRDEA7Fpx_JGvbn4FS4wF0oTfLeUNmWxKuLs8' },
         { charset: 'utf-8' },

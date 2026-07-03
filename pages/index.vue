@@ -7,10 +7,15 @@
           UX Dojo
           <span class="text-primary">🥋🎮</span>
         </h1>
-        <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+        <p class="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
           Master the Laws of UX through interactive mini-games.
           Learn by doing, not just reading!
         </p>
+        <NuxtLink to="/games/hick">
+          <UiButton size="lg">
+            Start with a 2-minute game
+          </UiButton>
+        </NuxtLink>
       </header>
 
       <!-- Games Grid -->
@@ -54,86 +59,40 @@
 </template>
 
 <script setup lang="ts">
-const games = [
+import { games } from '~/utils/games'
+
+// The global titleTemplate appends " | UX Dojo"; the home page keeps its
+// existing full title instead of getting the suffix twice.
+useHead({
+  titleTemplate: (title) => title || 'UX Dojo',
+})
+
+useSeoMeta({
+  title: 'UX Dojo - Learn UX Laws Through Games',
+  description: 'Interactive mini-games that teach the Laws of UX through fun challenges',
+  ogTitle: 'UX Dojo - Learn UX Laws Through Games',
+  ogDescription: 'Interactive mini-games that teach the Laws of UX through fun challenges',
+  ogUrl: 'https://ux-dojo.com/',
+})
+
+useJsonLd([
   {
-    id: 'hick',
-    title: "Hick's Law Challenge",
-    description: "More choices = slower decisions. Test how menu complexity affects your speed.",
-    icon: "🎯",
-    link: "/games/hick",
-    duration: "3-5 min"
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'UX Dojo',
+    url: 'https://ux-dojo.com/',
+    description: 'Interactive mini-games that teach the Laws of UX through fun challenges',
   },
   {
-    id: 'fitts',
-    title: "Fitts's Law Reflex",
-    description: "Size and distance matter! Click targets and discover the science of pointing.",
-    icon: "🎪",
-    link: "/games/fitts",
-    duration: "3 min"
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: games.map((game, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: game.title,
+      url: `https://ux-dojo.com${game.link}`,
+      description: game.description,
+    })),
   },
-  {
-    id: 'miller',
-    title: "Miller's Law Memory",
-    description: "Can you remember 7±2 items? Test your short-term memory limits.",
-    icon: "🧠",
-    link: "/games/miller",
-    duration: "4 min"
-  },
-  {
-    id: 'serial',
-    title: "Serial Position Recall",
-    description: "First and last stick best. Experience the primacy and recency effects.",
-    icon: "📝",
-    link: "/games/serial",
-    duration: "3 min"
-  },
-  {
-    id: 'progressive',
-    title: "Progressive Disclosure Race",
-    description: "All at once vs step-by-step. Which interface is faster?",
-    icon: "🔄",
-    link: "/games/progressive",
-    duration: "5 min"
-  },
-  {
-    id: 'quiz',
-    title: "Law or Not?",
-    description: "UX truth or myth? Test your knowledge in this rapid-fire quiz.",
-    icon: "❓",
-    link: "/games/quiz",
-    duration: "3 min"
-  },
-  {
-    id: 'gestalt',
-    title: "Gestalt Principles Puzzle",
-    description: "Group elements using proximity, similarity, closure, and continuity.",
-    icon: "🧩",
-    link: "/games/gestalt",
-    duration: "4-6 min"
-  },
-  {
-    id: 'contrast',
-    title: "Color Contrast Speedrun",
-    description: "Train your eye for WCAG accessibility standards. AA or AAA?",
-    icon: "🎨",
-    link: "/games/contrast",
-    duration: "3 min"
-  },
-  {
-    id: 'accessibility',
-    title: "Accessibility Audit Challenge",
-    description: "Find and fix WCAG violations. Make the web accessible for everyone!",
-    icon: "♿",
-    link: "/games/accessibility",
-    duration: "5-7 min"
-  },
-  {
-    id: 'dark-patterns',
-    title: "Dark Pattern Detective",
-    description: "Spot manipulative design tactics and learn ethical alternatives.",
-    icon: "🕵️",
-    link: "/games/dark-patterns",
-    duration: "4 min"
-  }
-]
+])
 </script>
